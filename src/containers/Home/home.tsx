@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { fetchCustomer } from '../../store/actions/customer';
 import { ICustomers } from '../../store/actions/types/actionTypes';
+import { GlobalStyle } from '../../components/TableComponent/TableStyledComponent';
+import { TableCompoent } from '../../components/TableComponent/Table';
 
 interface IState extends RouteComponentProps {
     fetchCustomer: typeof fetchCustomer,
@@ -10,8 +12,8 @@ interface IState extends RouteComponentProps {
 }
 
 class Home extends React.Component<IState> {
-    constructor(Props: any) {
-        super(Props);
+    constructor(props: any) {
+        super(props);
     }
 
     componentDidMount() {
@@ -19,11 +21,14 @@ class Home extends React.Component<IState> {
     }
 
     public render() {
-        return this.props.customerReducer.results.map((customer, index) => {
-            return (
-                <div>{customer.first_name}</div>
-            );
-        })
+        // return this.props.customerReducer.results.map((customer, index) => {
+        return (
+            <div>
+                <GlobalStyle />
+                <TableCompoent customer = {this.props.customerReducer}/>
+            </div>
+        );
+        // })
 
     }
 }
@@ -35,7 +40,7 @@ const mapStateToProps = (state: any) => {
     return { customerReducer };
 };
 
-const mapDispatchToProps =  {
+const mapDispatchToProps = {
     fetchCustomer
 }
 
