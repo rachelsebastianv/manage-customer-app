@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ICustomers, ICustomer } from '../../store/actions/types/actionTypes'
+import { ICustomers } from '../../store/actions/types/actionTypes'
 import { RouteProps } from 'react-router';
 
 interface Props extends RouteProps {

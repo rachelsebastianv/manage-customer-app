@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
-    BrowserRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
 
 import { NavigationItems } from '../../components/Navigation/NavigationItems'
 import Home from '../../containers/Home/home' ;
+import Create from '../../containers/Create/Create'
 
 
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
     },
     {
         path: "/create",
-        main: () => <h2>create</h2>
+        main: Create
     },
     {
         path: "/edit/:id",

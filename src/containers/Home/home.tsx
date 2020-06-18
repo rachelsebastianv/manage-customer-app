@@ -12,10 +12,6 @@ interface IState extends RouteComponentProps {
 }
 
 class Home extends React.Component<IState> {
-    constructor(props: any) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.fetchCustomer();
     }
@@ -25,7 +21,7 @@ class Home extends React.Component<IState> {
         return (
             <div>
                 <GlobalStyle />
-                <TableCompoent customer = {this.props.customerReducer}/>
+                <TableCompoent customer={this.props.customerReducer} />
             </div>
         );
         // })
