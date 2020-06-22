@@ -1,18 +1,24 @@
 {
-    "customers": [
-        {
-            "id": 1,
-            "first_name": "Customer_1_fn",
-            "last_name": "Customer_1_ln",
-            "dob": "11/12/1998",
-            "description": "Customer_1 info"
-        },
-        {
-            "id": 2,
-            "first_name": "Customer_2_fn",
-            "last_name": "Customer_2_ln",
-            "dob": "1/2/1980",
-            "description": "Customer_2 info"
-        }
-    ]
+  "customers": [
+    {
+      "id": 1,
+      "first_name": "john",
+      "last_name": "doe",
+      "dob": "11/12/1998",
+      "description": "Customer_1 info"
+    },
+    {
+      "id": 2,
+      "first_name": "harry",
+      "last_name": "charles",
+      "dob": "1/2/1980",
+      "description": "Customer_2 info"
+    },
+    {
+      "id": 4,
+      "first_name": "anup",
+      "last_name": "antony",
+      "dob": ""
+    }
+  ]
 }

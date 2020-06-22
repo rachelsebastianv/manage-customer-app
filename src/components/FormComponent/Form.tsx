@@ -1,75 +1,84 @@
-import React, { Component } from "react";
+import React from "react";
 import { Formik } from "formik";
+import { RouteProps } from "react-router-dom";
 import { Form, Input, Title, Text, Button, Label } from "./FormStyledComponent";
+import { ICustomer } from '../../store/actions/types/actionTypes';
 
-export class FormComponent extends Component {
-  render() {
+interface Props extends RouteProps {
+    customer?: ICustomer,
+    onActionClick: ((customer: ICustomer) => void),
+    // actionButton: boolean
+}
+
+// export class FormComponent extends Component {
+export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
+    const initialValues = customer? customer : { id: "", first_name: "", last_name: "", dob: "" }
     return (
-      <div>
-        <Title>Form</Title>
-        {/* FORMIK */}
-        <Formik
-          initialValues={{ first_name: "", last_name: "" , dob: ""}}
-          validate={values => {
-            let errors : any = {};
-            // VALIDATION
-            if (!values.first_name) {
-              errors.first_name = "Please mention your first name";
-            }
+        <div>
+            <Title>Form</Title>
+            {/* FORMIK */}
+            <Formik<ICustomer>
+                initialValues={initialValues}
+                validate={values => {
+                    let errors: any = {};
+                    // VALIDATION
+                    if (!values.first_name) {
+                        errors.first_name = "Please mention your first name";
+                    }
 
-            if (!values.last_name) {
-              errors.last_name = "Please mention your last name";
-            }
-            return errors;
-          }}
-          onSubmit={values => {
-            console.log(values);
-          }}
-          render={({
-            touched,
-            errors,
-            values,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          }) => (
-            <Form onSubmit={handleSubmit}>
-              <Label>
-                Email *
+                    if (!values.last_name) {
+                        errors.last_name = "Please mention your last name";
+                    }
+                    return errors;
+                }}
+                onSubmit={values => {
+                    debugger;
+                    onActionClick(values)
+                }}
+                render={({
+                    touched,
+                    errors,
+                    values,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                }) => (
+                        <Form onSubmit={handleSubmit}>
+                            <Label>
+                                FirstName *
                 {touched.first_name &&
-                  errors.first_name && <Text color="red">{errors.first_name}</Text>}
-                <Input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.first_name}
-                  border={touched.first_name && errors.first_name && "1px solid red"}
-                  type="text"
-                  name="first_name"
-                  placeholder="First Name"
-                />
-              </Label>
-              <Label>
-                Password *
+                                    errors.first_name && <Text color="red">{errors.first_name}</Text>}
+                                <Input
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.first_name}
+                                    border={touched.first_name && errors.first_name && "1px solid red"}
+                                    type="text"
+                                    name="first_name"
+                                    placeholder="First Name"
+                                />
+                            </Label>
+                            <Label>
+                                LastName *
                 {touched.last_name &&
-                  errors.last_name && <Text color="red">{errors.last_name}</Text>}
-                <Input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.last_name}
-                  border={
-                    touched.last_name && errors.last_name && "1px solid red"
-                  }
-                  type="text"
-                  name="last_name"
-                  placeholder="Last Name"
-                />
-              </Label>
-              <Button type="submit">Submit</Button>
-            </Form>
-          )}
-        />
-        {/* END OF FORMIK */}
-      </div>
+                                    errors.last_name && <Text color="red">{errors.last_name}</Text>}
+                                <Input
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.last_name}
+                                    border={
+                                        touched.last_name && errors.last_name && "1px solid red"
+                                    }
+                                    type="text"
+                                    name="last_name"
+                                    placeholder="Last Name"
+                                />
+                            </Label>
+                            <Button type="submit">Submit</Button>
+                        </Form>
+                    )}
+            />
+            {/* END OF FORMIK */}
+        </div>
     );
-  }
 }

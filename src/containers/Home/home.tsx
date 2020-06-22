@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { fetchCustomer } from '../../store/actions/customer';
-import { ICustomers } from '../../store/actions/types/actionTypes';
+import { fetchCustomer, deleteCustomer } from '../../store/actions/customer';
+import { ICustomers, ICustomer } from '../../store/actions/types/actionTypes';
 import { GlobalStyle } from '../../components/TableComponent/TableStyledComponent';
 import { TableCompoent } from '../../components/TableComponent/Table';
 
 interface IState extends RouteComponentProps {
     fetchCustomer: typeof fetchCustomer,
-    customerReducer: ICustomers
+    deleteCustomer: typeof deleteCustomer,
+    results: ICustomer[]
 }
 
 class Home extends React.Component<IState> {
@@ -16,12 +17,16 @@ class Home extends React.Component<IState> {
         this.props.fetchCustomer();
     }
 
+    // deleteCustomer: () => {
+    //     this.props.deleteCustomer();
+    // }
+
     public render() {
         // return this.props.customerReducer.results.map((customer, index) => {
         return (
             <div>
                 <GlobalStyle />
-                <TableCompoent customer={this.props.customerReducer} />
+                <TableCompoent {...this.props} customer={this.props.results} />
             </div>
         );
         // })
@@ -30,14 +35,15 @@ class Home extends React.Component<IState> {
 }
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ICustomers) => {
 
-    const { customerReducer } = state;;
-    return { customerReducer };
+    const { results } = state;
+    return { results };
 };
 
 const mapDispatchToProps = {
-    fetchCustomer
+    fetchCustomer,
+    deleteCustomer
 }
 
 export default connect(

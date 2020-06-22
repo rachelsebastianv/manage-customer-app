@@ -1,4 +1,4 @@
-import { ICustomers, CUSTOMER_FETCH, CUSTOMER_FETCH_SUCCESS, CUSTOMER_FETCH_FAILED, CustomerActionTypes } from "../actions/types/actionTypes";
+import { ICustomers, CUSTOMER_FETCH, CUSTOMER_FETCH_SUCCESS, CUSTOMER_FETCH_FAILED, CustomerActionTypes, CUSTOMER_DELETE } from "../actions/types/actionTypes";
 
 
 export const initialState: ICustomers = {
@@ -6,7 +6,7 @@ export const initialState: ICustomers = {
     loading: false
 }
 
-export const customerReducer = (state = initialState, action: CustomerActionTypes) => {
+export const customerReducer = (state = initialState, action: CustomerActionTypes): ICustomers => {
     switch (action.type) {
 
         case CUSTOMER_FETCH:
@@ -29,6 +29,10 @@ export const customerReducer = (state = initialState, action: CustomerActionType
                 loading: false
             }
 
+        case CUSTOMER_DELETE:
+            return {
+                ...state
+            }
 
         default:
             return { ...state };

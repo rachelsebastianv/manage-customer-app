@@ -7,6 +7,7 @@ import {
 import { NavigationItems } from '../../components/Navigation/NavigationItems'
 import Home from '../../containers/Home/home' ;
 import Create from '../../containers/Create/Create'
+import Edit from '../../containers/Edit/Edit';
 
 
 const routes = [
@@ -21,7 +22,7 @@ const routes = [
     },
     {
         path: "/edit/:id",
-        main: () => <h2>edit</h2>
+        main: Edit
     }
 ];
 
