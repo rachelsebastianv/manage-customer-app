@@ -2,20 +2,19 @@ import React from "react";
 import { Formik } from "formik";
 import { RouteProps } from "react-router-dom";
 import { Form, Input, Title, Text, Button, Label } from "./FormStyledComponent";
-import { ICustomer } from '../../store/actions/types/actionTypes';
+import { Customer } from '../../store/actions/types/actionTypes';
 
-interface Props extends RouteProps {
-    customer?: ICustomer,
-    onActionClick: ((customer: ICustomer) => void),
+interface FormProps extends RouteProps {
+    customer?: Customer,
+    onActionClick: ((customer: Customer) => void),
 }
 
-// export class FormComponent extends Component {
-export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
+export const FormComponent: React.FC<FormProps> = ({ customer, onActionClick }) => {
     const initialValues = customer ? customer : { id: "", first_name: "", last_name: "", dob: "" }
     return (
         <div>
             <Title>Add Customer</Title>
-            <Formik<ICustomer>
+            <Formik<Customer>
                 initialValues={initialValues}
                 validate={values => {
                     let errors: any = {};
@@ -34,7 +33,6 @@ export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
                     return errors;
                 }}
                 onSubmit={values => {
-                    debugger;
                     onActionClick(values)
                 }}
                 render={({
@@ -96,7 +94,6 @@ export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
                         </Form>
                     )}
             />
-            {/* END OF FORMIK */}
         </div>
     );
 }

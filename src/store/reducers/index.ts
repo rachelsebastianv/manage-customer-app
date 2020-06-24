@@ -1,6 +1,3 @@
-import { customerReducer } from './customer'
+import { customerReducer } from './customerReducer'
 
-// export const allReducers = customerReducer;
-
-// export const rootReducer = combineReducers(allReducers);
 export const rootReducer = customerReducer;

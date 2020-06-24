@@ -1,38 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import axios from 'axios';
-import { } from '../../store/actions/customer';
 import { FormComponent } from '../../components/FormComponent/Form'
-import { ICustomer } from '../../store/actions/types/actionTypes';
+import { Customer } from '../../store/actions/types/actionTypes';
+import { addCustomer } from '../../store/actions/customerActions';
 
-interface IState extends RouteComponentProps {
-
+interface CreateProps extends RouteComponentProps {
+    addCustomer: typeof addCustomer
 }
 
-class Create extends React.Component<IState> {
+class Create extends React.Component<CreateProps> {
 
-    // constructor(props: RouteComponentProps) {
-    //     super(props);
-    //     this.state = {
-    //         customer: {}
-    //     }
-    // }
-
-    /**
- * Handles Clicks from each Card
- *
- * @memberof Create
- */
-    handleAddCustomer = (value: ICustomer) => {
-        axios.post(`http://localhost:3004/customers`, value).then(data => [
-            setTimeout(() => {
-                this.props.history.push('/');
-            }, 300)
-        ]);
+    handleAddCustomer = (customer: Customer) => {
+        this.props.addCustomer(customer);
+        setTimeout(() => {
+            this.props.history.push('/');
+        }, 600);
     };
-
-
 
     public render() {
         return (
@@ -42,14 +26,11 @@ class Create extends React.Component<IState> {
     }
 }
 
-
-const mapStateToProps = (state: any) => {
-};
-
 const mapDispatchToProps = {
+    addCustomer
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(Create);

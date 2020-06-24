@@ -1,11 +1,9 @@
 
-import * as action from './customer'
-import { ICustomer, CUSTOMER_FETCH_SUCCESS, CUSTOMER_FETCH_FAILED } from './types/actionTypes';
+import * as action from './customerActions'
+import { Customer, CUSTOMER_FETCH_SUCCESS, CUSTOMER_FETCH_FAILED } from './types/actionTypes';
 
-
-
-
-const customer: ICustomer = {
+const customer: Customer = {
+  id: '1',
   first_name: 'rac',
   last_name: 'seb',
   dob: '11/12/2013'

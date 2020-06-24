@@ -1,34 +1,22 @@
 {
   "customers": [
     {
+      "id": 1,
+      "first_name": "Sara",
+      "last_name": "Tancredi",
+      "dob": "11/01/1976"
+    },
+    {
       "id": 2,
-      "first_name": "adi",
-      "last_name": "update",
-      "dob": ""
+      "first_name": "Michael",
+      "last_name": "Scofield",
+      "dob": "01/05/1976"
     },
     {
-      "id": 3,
-      "first_name": "rr",
-      "last_name": "ads",
-      "dob": ""
-    },
-    {
-      "id": 4,
-      "first_name": "Anup",
-      "last_name": "Antonios",
-      "dob": ""
-    },
-    {
-      "id": 6,
-      "first_name": "hh",
-      "last_name": "fff",
-      "dob": ""
-    },
-    {
-      "id": 7,
-      "first_name": "dappa",
-      "last_name": "yoli",
-      "dob": ""
+      "id": 5,
+      "first_name": "Roger",
+      "last_name": "Federer",
+      "dob": "12/05/1989"
     }
   ]
 }

@@ -1,48 +1,50 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import axios from 'axios';
-import { } from '../../store/actions/customer';
+import { } from '../../store/actions/customerActions';
 import { FormComponent } from '../../components/FormComponent/Form'
-import { ICustomer, ICustomers } from '../../store/actions/types/actionTypes';
+import { Customer, State } from '../../store/actions/types/actionTypes';
+import { editCustomer } from '../../store/actions/customerActions';
 
-interface IState {
-    match: { params: { id: string } }
 
+interface EditProps {
+    match: { params: { id: string } },
+    editCustomer: typeof editCustomer
 }
 
-const Edit: React.FC<RouteComponentProps & IState> = (
+const Edit: React.FC<RouteComponentProps & EditProps> = (
     {
-        history, match: { params: { id }, }
+        history, match: { params: { id }, },
+        editCustomer
     }) => {
 
 
-    const selectCustomer = useSelector((state: ICustomers) => {
+    const selectCustomer = useSelector((state: State) => {
         console.log('state', state);
         return state.results.find(
-            (customer: ICustomer) => customer.id == id
+            (customer: Customer) => customer.id == id
         )
     });
 
-    
-
-    const handleEditCustomer = (value: ICustomer) => {
-        axios.patch(`http://localhost:3004/customers/${id}`, value).then(data => {
-            setTimeout(() => {
-                history.push('/');
-            }, 1500)
-        })
-
-    }
+    const handleEditCustomer = (customer: Customer) => {
+        editCustomer(customer);
+        setTimeout(() => {
+            history.push('/');
+        }, 600);
+    };
 
     if (selectCustomer) {
         return (<FormComponent customer={selectCustomer} onActionClick={handleEditCustomer} />)
     }
 
     return (<div></div>)
-
-
-
 }
 
-export default Edit;
+const mapDispatchToProps = {
+    editCustomer
+}
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Edit);

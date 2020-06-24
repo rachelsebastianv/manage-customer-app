@@ -1,39 +1,37 @@
 import React from 'react';
-import { ICustomer } from '../../store/actions/types/actionTypes';
+import { Customer } from '../../store/actions/types/actionTypes';
 import { Input } from '../../components/FormComponent/FormStyledComponent';
 
-interface Props {
+interface CustomerSearchProps {
     searchText: string;
     setSearchText: (value: string) => void,
-    customers: ICustomer[],
-    setFilteredCustomers: (customers: ICustomer[]) => void,
+    customers: Customer[],
+    createCustomerSubset: (customers: Customer[]) => void,
 }
 
-const CustomerSearch: React.FC<Props> = ({
+const CustomerSearch: React.FC<CustomerSearchProps> = ({
     searchText,
     setSearchText,
     customers,
-    setFilteredCustomers,
+    createCustomerSubset,
 }) => (
         <div>
             <Input
-                // data-testid="customer-search"
                 id="customer-search"
-                placeholder="Search by first or last name"
+                placeholder=" Search by first or last name"
                 value={searchText}
                 onChange={({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
                     setSearchText(value);
                     if (value !== '') {
                         const searchResult = customers.filter(
-                            (customer: ICustomer) => (
-                                // firstName or lastName must begin with the search term
+                            (customer: Customer) => (
                                 customer.first_name.toLowerCase().indexOf(value.toLowerCase()) === 0
                                 || customer.last_name.toLowerCase().indexOf(value.toLowerCase()) === 0
                             )
                         );
-                        setFilteredCustomers(searchResult);
+                        createCustomerSubset(searchResult);
                     } else {
-                        setFilteredCustomers(customers);
+                        createCustomerSubset(customers);
                     }
                 }}
             />

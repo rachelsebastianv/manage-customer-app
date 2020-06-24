@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { connect, useSelector } from 'react-redux';
-import { fetchCustomer, deleteCustomer } from '../../store/actions/customer';
-import { ICustomers, ICustomer } from '../../store/actions/types/actionTypes';
+import { fetchCustomer, deleteCustomer } from '../../store/actions/customerActions';
+import { State } from '../../store/actions/types/actionTypes';
 import { GlobalStyle } from '../../components/TableComponent/TableStyledComponent';
 import { TableComponent } from '../../components/TableComponent/Table';
 import CustomerSearch from './CustomerSearch';
 
-interface IState {
+interface HomeProps {
     fetchCustomer: typeof fetchCustomer,
-    deleteCustomer: typeof deleteCustomer,
-    results: ICustomer[]
+    deleteCustomer: typeof deleteCustomer
 }
 
-const Home: React.FC<IState> = ({ fetchCustomer, deleteCustomer, results }) => {
+const Home: React.FC<HomeProps> = ({ fetchCustomer, deleteCustomer }) => {
     const [searchText, setSearchText] = React.useState('');
-    const customers = useSelector((state: ICustomers) => state.results);
+    const customers = useSelector((state: State) => state.results);
 
     const [customerSubset, setCustomerSubset] = React.useState(customers);
 
@@ -32,7 +31,7 @@ const Home: React.FC<IState> = ({ fetchCustomer, deleteCustomer, results }) => {
                 searchText={searchText}
                 setSearchText={setSearchText}
                 customers={customers}
-                setFilteredCustomers={setCustomerSubset}
+                createCustomerSubset={setCustomerSubset}
             />
             <GlobalStyle />
             <TableComponent deleteCustomer={deleteCustomer} customer={customerSubset} />

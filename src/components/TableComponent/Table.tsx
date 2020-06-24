@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { RouteProps } from 'react-router';
-import { ICustomer } from '../../store/actions/types/actionTypes'
-import { deleteCustomer } from '../../store/actions/customer';
+import { Customer } from '../../store/actions/types/actionTypes'
+import { deleteCustomer } from '../../store/actions/customerActions';
 import { Button } from "../FormComponent/FormStyledComponent";
 
-interface Props extends RouteProps {
-    customer: ICustomer[],
+interface TableProps extends RouteProps {
+    customer: Customer[],
     deleteCustomer: typeof deleteCustomer
 }
 
-export const TableComponent: React.FC<Props> = ({ customer, deleteCustomer }) => {
+export const TableComponent: React.FC<TableProps> = ({ customer, deleteCustomer }) => {
     return (
         <table>
             <thead>
@@ -35,7 +35,7 @@ export const TableComponent: React.FC<Props> = ({ customer, deleteCustomer }) =>
                                         <div>
                                             <Link to={`edit/${customer.id}`}>Edit Customer </Link>
                                             <Button onClick={() => {
-                                                if (window.confirm(`Delete '${customer.first_name} ${customer.last_name}' from customers?`)) {
+                                                if (window.confirm(`Are you sure you want to delete '${customer.first_name} ${customer.last_name}'?`)) {
                                                     deleteCustomer(customer.id);
                                                 }
                                             }}>Delete Customer</Button>

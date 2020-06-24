@@ -1,12 +1,13 @@
 
-import { customerReducer, initialState } from './customer';
-import { fetchCustomer } from '../actions/customer'
-import { ICustomer,CUSTOMER_FETCH, CUSTOMER_FETCH_SUCCESS, CUSTOMER_FETCH_FAILED } from '../actions/types/actionTypes';
+import { customerReducer, initialState } from './customerReducer';
+import { fetchCustomer } from '../actions/customerActions'
+import { Customer,CUSTOMER_FETCH, CUSTOMER_FETCH_SUCCESS, CUSTOMER_FETCH_FAILED } from '../actions/types/actionTypes';
 
 
 
 
-const customer: ICustomer = {
+const customer: Customer = {
+  id: '1',
   first_name: 'rac',
   last_name: 'seb',
   dob: '11/12/2013'
