@@ -5,9 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `yarn server`
-
-yarn global add json-server / npm install -g json-server
-
+Starts the mock json server. 
+The initial data for the table is fetched from this json server. Make sure to start this before running the app using `yarn start`
 
 ### `yarn start`
 
