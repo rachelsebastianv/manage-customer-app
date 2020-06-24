@@ -7,7 +7,6 @@ export const NavigationItems = () => {
     <ul className='NavigationItems'>
         <NavigationItem link="/" exact>Home</NavigationItem>
         <NavigationItem link="/create">Create</NavigationItem>
-        <NavigationItem link="/edit/:id">Edit</NavigationItem>
     </ul>
   );
 }

@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 import { NavigationItems } from '../../components/Navigation/NavigationItems'
-import Home from '../../containers/Home/home' ;
+import Home from '../../containers/Home/Home';
 import Create from '../../containers/Create/Create'
 import Edit from '../../containers/Edit/Edit';
 
@@ -25,6 +25,7 @@ const routes = [
         main: Edit
     }
 ];
+
 
 class Layout extends Component {
     render() {

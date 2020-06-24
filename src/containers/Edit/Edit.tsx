@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
 import { } from '../../store/actions/customer';

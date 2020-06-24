@@ -1,50 +1,49 @@
 import React from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RouteProps } from 'react-router';
-import axios from 'axios';
-import { ICustomers, ICustomer } from '../../store/actions/types/actionTypes'
-
+import { ICustomer } from '../../store/actions/types/actionTypes'
+import { deleteCustomer } from '../../store/actions/customer';
+import { Button } from "../FormComponent/FormStyledComponent";
 
 interface Props extends RouteProps {
-    customer: ICustomer[]
-    // type: string,
-    // onActionClick: ((actionType: string, property: Property) => void)
-    // actionButton: booleans
+    customer: ICustomer[],
+    deleteCustomer: typeof deleteCustomer
 }
-export const TableCompoent: React.FC<RouteComponentProps & Props> = ({ history, customer }) => {
 
-    const deleteCustomer = (id: number) => {
-        axios.delete(`http://localhost:3004/customers/${id}`).then(data => {
-            history.push('/');
-        })
-    }
-
+export const TableComponent: React.FC<Props> = ({ customer, deleteCustomer }) => {
     return (
         <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>DOB</th>
-                <th>Actions</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>DOB</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
             {
-                // Object.values(customer.results).map((customer:any, index) => {
                 customer.map((customer: any, index: number) => {
                     return (
-                        <tr key={index}>
-                            <td>{customer.first_name}</td>
-                            <td>{customer.last_name}</td>
-                            <td>{customer.dob}</td>
-                            <td>
+                        <tbody>
+                            <tr key={index}>
+                                <td>{customer.first_name}</td>
+                                <td>{customer.last_name}</td>
+                                <td>{customer.dob}</td>
+                                <td>
 
-                                <div>
                                     <div>
-                                        <Link to={`edit/${customer.id}`}>Edit Customer </Link>
-                                        <button onClick={() => deleteCustomer(customer.id)}>Delete Customer</button>
+                                        <div>
+                                            <Link to={`edit/${customer.id}`}>Edit Customer </Link>
+                                            <Button onClick={() => {
+                                                if (window.confirm(`Delete '${customer.first_name} ${customer.last_name}' from customers?`)) {
+                                                    deleteCustomer(customer.id);
+                                                }
+                                            }}>Delete Customer</Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        </tbody>
                     );
                 })}
         </table>

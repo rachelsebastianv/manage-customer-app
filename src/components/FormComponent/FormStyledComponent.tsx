@@ -3,14 +3,14 @@ import styled from 'styled-components';
 // Forms, inputs, buttons
 
 export const Form = styled.form`
-  width: 300px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 interface InputProps {
-    border: any;
+    border?: any;
   };
 
 export const Input = styled.input<InputProps>`
@@ -18,6 +18,7 @@ export const Input = styled.input<InputProps>`
   height: 35px;
   border: ${props => props.border || '1px solid #ccc'};
   background-color: #fff;
+  margin-bottom: 10px
 `;
 
 
@@ -58,4 +59,5 @@ export const Label = styled.label`
   font-size: 0.8em;
   margin: 0.5em 0;
   position: relative;
+  margin-bottom: 10px;
 `;

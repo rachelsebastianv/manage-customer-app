@@ -8,6 +8,7 @@ export const CUSTOMER_CREATE = 'CUSTOMER_CREATE';
 export const CUSTOMER_CREATE_SUCCESS = 'CUSTOMER_CREATE_SUCCESS';
 export const CUSTOMER_CREATE_FAILED = 'CUSTOMER_CREATE_FAILED';
 export const CUSTOMER_DELETE = 'CUSTOMER_DELETE';
+export const CUSTOMER_DELETE_SUCCESS = 'CUSTOMER_DELETE_SUCCESS';
 
 
 
@@ -29,13 +30,13 @@ export interface ICustomers {
 }
 
 export interface IFetchCustomerAction {
-    type: string,
+    type: typeof CUSTOMER_FETCH,
     payload?: any
 }
 
 export interface IDeleteCustomerAction {
     type: string,
-    payload?:any
+    payload: any
 }
 
 export type CustomerActionTypes = IFetchCustomerAction | IDeleteCustomerAction;

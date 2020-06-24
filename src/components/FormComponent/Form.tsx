@@ -7,27 +7,29 @@ import { ICustomer } from '../../store/actions/types/actionTypes';
 interface Props extends RouteProps {
     customer?: ICustomer,
     onActionClick: ((customer: ICustomer) => void),
-    // actionButton: boolean
 }
 
 // export class FormComponent extends Component {
 export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
-    const initialValues = customer? customer : { id: "", first_name: "", last_name: "", dob: "" }
+    const initialValues = customer ? customer : { id: "", first_name: "", last_name: "", dob: "" }
     return (
         <div>
-            <Title>Form</Title>
-            {/* FORMIK */}
+            <Title>Add Customer</Title>
             <Formik<ICustomer>
                 initialValues={initialValues}
                 validate={values => {
                     let errors: any = {};
                     // VALIDATION
                     if (!values.first_name) {
-                        errors.first_name = "Please mention your first name";
+                        errors.first_name = "Please enter your first name";
                     }
 
                     if (!values.last_name) {
-                        errors.last_name = "Please mention your last name";
+                        errors.last_name = "Please enter your last name";
+                    }
+
+                    if (!values.dob) {
+                        errors.dob = "Please enter your date of birth";
                     }
                     return errors;
                 }}
@@ -45,7 +47,7 @@ export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
                 }) => (
                         <Form onSubmit={handleSubmit}>
                             <Label>
-                                FirstName *
+                                First name *
                 {touched.first_name &&
                                     errors.first_name && <Text color="red">{errors.first_name}</Text>}
                                 <Input
@@ -55,11 +57,11 @@ export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
                                     border={touched.first_name && errors.first_name && "1px solid red"}
                                     type="text"
                                     name="first_name"
-                                    placeholder="First Name"
+                                    placeholder=" First name"
                                 />
                             </Label>
                             <Label>
-                                LastName *
+                                Last name *
                 {touched.last_name &&
                                     errors.last_name && <Text color="red">{errors.last_name}</Text>}
                                 <Input
@@ -71,7 +73,23 @@ export const FormComponent: React.FC<Props> = ({ customer, onActionClick }) => {
                                     }
                                     type="text"
                                     name="last_name"
-                                    placeholder="Last Name"
+                                    placeholder=" Last name"
+                                />
+                            </Label>
+                            <Label>
+                                Date of birth *
+                {touched.dob &&
+                                    errors.dob && <Text color="red">{errors.dob}</Text>}
+                                <Input
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.dob}
+                                    border={
+                                        touched.dob && errors.dob && "1px solid red"
+                                    }
+                                    type="text"
+                                    name="dob"
+                                    placeholder=" Eg- 11/12/2013"
                                 />
                             </Label>
                             <Button type="submit">Submit</Button>

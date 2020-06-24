@@ -14,8 +14,9 @@ export const fetchCustomer = (): CustomerActionTypes => {
   }
 }
 
-export const deleteCustomer = (): CustomerActionTypes => {
+export const deleteCustomer = (id: number): CustomerActionTypes => {
   return {
-    type: CUSTOMER_DELETE
+    type: CUSTOMER_DELETE,
+    payload: id
   }
 }

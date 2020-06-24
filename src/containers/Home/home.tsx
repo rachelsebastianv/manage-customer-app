@@ -1,45 +1,44 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
+import { connect, useSelector } from 'react-redux';
 import { fetchCustomer, deleteCustomer } from '../../store/actions/customer';
 import { ICustomers, ICustomer } from '../../store/actions/types/actionTypes';
 import { GlobalStyle } from '../../components/TableComponent/TableStyledComponent';
-import { TableCompoent } from '../../components/TableComponent/Table';
+import { TableComponent } from '../../components/TableComponent/Table';
+import CustomerSearch from './CustomerSearch';
 
-interface IState extends RouteComponentProps {
+interface IState {
     fetchCustomer: typeof fetchCustomer,
     deleteCustomer: typeof deleteCustomer,
     results: ICustomer[]
 }
 
-class Home extends React.Component<IState> {
-    componentDidMount() {
-        this.props.fetchCustomer();
-    }
+const Home: React.FC<IState> = ({ fetchCustomer, deleteCustomer, results }) => {
+    const [searchText, setSearchText] = React.useState('');
+    const customers = useSelector((state: ICustomers) => state.results);
 
-    // deleteCustomer: () => {
-    //     this.props.deleteCustomer();
-    // }
+    const [customerSubset, setCustomerSubset] = React.useState(customers);
 
-    public render() {
-        // return this.props.customerReducer.results.map((customer, index) => {
-        return (
-            <div>
-                <GlobalStyle />
-                <TableCompoent {...this.props} customer={this.props.results} />
-            </div>
-        );
-        // })
+    React.useEffect(() => {
+        fetchCustomer();
+    },[])
 
-    }
+    React.useEffect(() => {
+        setCustomerSubset(customers);
+    }, [customers])
+
+    return (
+        <div>
+            <CustomerSearch
+                searchText={searchText}
+                setSearchText={setSearchText}
+                customers={customers}
+                setFilteredCustomers={setCustomerSubset}
+            />
+            <GlobalStyle />
+            <TableComponent deleteCustomer={deleteCustomer} customer={customerSubset} />
+        </div>
+    );
 }
-
-
-const mapStateToProps = (state: ICustomers) => {
-
-    const { results } = state;
-    return { results };
-};
 
 const mapDispatchToProps = {
     fetchCustomer,
@@ -47,6 +46,6 @@ const mapDispatchToProps = {
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(Home);
