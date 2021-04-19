@@ -11,11 +11,14 @@ Create a simple customer management app that allows basic CRUD operations which 
 
 A Single Page Application was built using the following technical stack
 
-Typescript
-ReactJS
-Redux, Redux Saga
-Basic Jest tests
-Use of components (preferably styled components, Formik for form)
+- Typescript - Strong typing and theryby reduce runtime errors, easy code maintenance, increased readability.
+- ReactJS - light weight JS library which is popular in the market and can be customised based on the requirement.
+- Redux, Redux Saga - Application state management for easy maintenance of the user states and unit testing.
+- Jest - React's unit testing framework
+- Libraries used : 
+
+  - Styled components - improved code maintainability, readability, performance by loading only required code for each components,  avoid classname collisions, 
+  - Formik - To use a popular third party solution for manging form elements and its different states. Also used for showcasing how quickly I can learn and use a third party library.)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
